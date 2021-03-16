@@ -32,7 +32,6 @@ public class GoogleTest {
         String searchQuery = "Selenium";
         int expectedResultsAmount = 9;
         driver.get(GOOGLE_URL);
-        waitForPageReadyState(15);
         driver.findElement(By.xpath("//input[@type='text']")).sendKeys(searchQuery, Keys.ENTER);
         List<WebElement> searchQueriesList = driver.findElements(By.xpath("//a/h3"));
 
@@ -41,9 +40,18 @@ public class GoogleTest {
 
     }
 
-    public void waitForPageReadyState(long timeout) {
-        new WebDriverWait(driver, timeout).until(
-                webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
+    @Test
+    public void verifyTheTitleOfTheFirstSearchResultPage() {
+        String searchQuery = "Selenium";
+        driver.get(GOOGLE_URL);
+        driver.findElement(By.xpath("//input[@type='text']")).sendKeys(searchQuery, Keys.ENTER);
+        List<WebElement> searchQueriesList = driver.findElements(By.xpath("//a/h3"));
+        searchQueriesList.get(0).click();
+
+        String expectedTitle = "Что такое Selenium? / Хабр";
+
+        assertEquals(expectedTitle, driver.getTitle());
+
     }
 
 
