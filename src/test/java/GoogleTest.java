@@ -1,7 +1,11 @@
-import org.junit.jupiter.api.*;
-import org.openqa.selenium.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
@@ -42,6 +46,7 @@ public class GoogleTest {
 
     @Test
     public void verifyTheTitleOfTheFirstSearchResultPage() {
+
         String searchQuery = "Selenium";
         driver.get(GOOGLE_URL);
         driver.findElement(By.xpath("//input[@type='text']")).sendKeys(searchQuery, Keys.ENTER);
@@ -51,6 +56,31 @@ public class GoogleTest {
         String expectedTitle = "Что такое Selenium? / Хабр";
 
         assertEquals(expectedTitle, driver.getTitle());
+
+    }
+
+    @Test
+    public void verifyThatEachSearchResultContainsSearchQuery() {
+
+        String searchQuery = "selenium";
+        driver.get(GOOGLE_URL);
+        driver.findElement(By.xpath("//input[@type='text']")).sendKeys(searchQuery, Keys.ENTER);
+        List<WebElement> searchQueriesList = driver.findElements(By.xpath("//a/h3"));
+
+        assertTrue(searchQueriesList.stream().allMatch(x -> x.getText().toLowerCase().contains(searchQuery)));
+
+    }
+
+    @Test
+    public void verifyThatEachSearchResultDoesntContainWrongSearchQuery() {
+
+        String searchQuery = "selenium";
+        String wrongSearchQuery = "seeleniuum";
+        driver.get(GOOGLE_URL);
+        driver.findElement(By.xpath("//input[@type='text']")).sendKeys(searchQuery, Keys.ENTER);
+        List<WebElement> searchQueriesList = driver.findElements(By.xpath("//a/h3"));
+
+        assertTrue(searchQueriesList.stream().noneMatch(x -> x.getText().toLowerCase().contains(wrongSearchQuery)));
 
     }
 
