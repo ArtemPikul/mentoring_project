@@ -4,7 +4,6 @@ import com.mentoring.pages.GoogleResultsPage;
 import com.mentoring.pages.GoogleSearchPage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
@@ -26,57 +25,52 @@ public class SearchSeleniumAndVerifyResultsTest extends BaseTest {
     }
 
     @Test
-    public void checkThatSearchWorksAndReturnsResults() {
+    public void testVerifySearchReturnsResults() {
 
         int expectedResultsAmount = 8;
-        googleSearchPage.searchForQuery(SEARCH_QUERY);
-        List<WebElement> listOfSearchResults = googleResultsPage.getListOfSearchResults();
+        googleSearchPage.searchFor(SEARCH_QUERY);
 
-        String firstSearchResultTitle = listOfSearchResults.get(0).getText();
+        String firstSearchResultTitle = googleResultsPage.getFirstSearchResultTitle();
+        int numberOfSearchResults = googleResultsPage.getNumberOfSearchResults();
 
-        assertEquals(expectedResultsAmount, listOfSearchResults.size(),
+        assertEquals(expectedResultsAmount, numberOfSearchResults,
                 "The actual result amount is not equal to the expected");
         assertTrue(firstSearchResultTitle.toLowerCase().contains(SEARCH_QUERY),
                 "The first search result doesn't contain the search query");
-
     }
 
     @Test
-    public void verifyTheTitleOfTheFirstSearchResultPage() {
+    public void testVerifyTheTitleOfTheFirstResultPage() {
 
-        googleSearchPage.searchForQuery(SEARCH_QUERY);
-        List<WebElement> listOfSearchResults = googleResultsPage.getListOfSearchResults();
-        listOfSearchResults.get(0).click();
+        googleSearchPage.searchFor(SEARCH_QUERY);
+        googleResultsPage.clickFirstResultLink();
 
         String expectedTitle = "Что такое Selenium? / Хабр";
 
-        assertEquals(expectedTitle, getDriver().getTitle(),
+        assertEquals(expectedTitle, googleResultsPage.getPageTitle(),
                 "The actual title doesn't match the expected");
-
     }
 
     @Test
-    public void verifyThatEachSearchResultContainsSearchQuery() {
+    public void testVerifyThatEachSearchResultContainsSearchQuery() {
 
-        googleSearchPage.searchForQuery(SEARCH_QUERY);
-        List<WebElement> listOfSearchResults = googleResultsPage.getListOfSearchResults();
+        googleSearchPage.searchFor(SEARCH_QUERY);
+        List<String> searchResultsList = googleResultsPage.getListOfSearchResultsLinksText();
 
-        assertTrue(listOfSearchResults.stream().allMatch(x -> x.getText().toLowerCase().contains(SEARCH_QUERY)),
+        assertTrue(searchResultsList.stream().allMatch(x -> x.toLowerCase().contains(SEARCH_QUERY)),
                 "Not all of the search results contain the search query");
-
     }
 
     @Test
-    public void verifyThatEachSearchResultDoesntContainWrongSearchQuery() {
+    public void testVerifyThatEachSearchResultDoesntContainWrongSearchQuery() {
 
         String wrongSearchQuery = "seeleniuum";
 
-        googleSearchPage.searchForQuery(SEARCH_QUERY);
-        List<WebElement> searchQueriesList = googleResultsPage.getListOfSearchResults();
+        googleSearchPage.searchFor(SEARCH_QUERY);
+        List<String> searchResultsList = googleResultsPage.getListOfSearchResultsLinksText();
 
-        assertTrue(searchQueriesList.stream().noneMatch(x -> x.getText().toLowerCase().contains(wrongSearchQuery)),
+        assertTrue(searchResultsList.stream().noneMatch(x -> x.toLowerCase().contains(wrongSearchQuery)),
                 "There is a search result which contains wrong search query");
-
     }
 
 

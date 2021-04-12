@@ -4,7 +4,7 @@ import static driver.DriverUtils.getDriver;
 
 public class BasePage {
 
-    public String getTitleOfThePage() {
+    public String getPageTitle() {
         return getDriver().getTitle();
     }
 

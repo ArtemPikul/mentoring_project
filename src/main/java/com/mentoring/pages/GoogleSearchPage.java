@@ -8,7 +8,7 @@ import static driver.DriverUtils.getDriver;
 
 public class GoogleSearchPage extends BasePage {
 
-    public void searchForQuery(String searchQuery) {
+    public void searchFor(String searchQuery) {
 
         WebElement searchField = getDriver().findElement(By.xpath("//input[@type='text']"));
         searchField.sendKeys(searchQuery, Keys.ENTER);
