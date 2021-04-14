@@ -25,4 +25,8 @@ public class WaitUtils {
         getDriver().manage().timeouts().implicitlyWait(timeout, TimeUnit.SECONDS);
     }
 
+    public static void waitForElementToBeClickable(long timeout, WebElement element) {
+        WebDriverWait wait = new WebDriverWait(getDriver(), timeout);
+        wait.until(ExpectedConditions.elementToBeClickable(element));
+    }
 }

@@ -22,7 +22,7 @@ public class GoogleSearchPage extends BasePage {
     }
 
     public void clickLoginButton() {
-        WebElement loginButton = getDriver().findElement(By.xpath("//a[@class='gb_4 gb_5 gb_ae gb_4c']"));
+        WebElement loginButton = getDriver().findElement(By.xpath("//a[@class='gb_4 gb_5 gb_ae gb_ce gb_4c']"));
         loginButton.click();
     }
 
@@ -31,16 +31,16 @@ public class GoogleSearchPage extends BasePage {
         emailField.sendKeys(email);
 
         WebElement emailNextButton = getDriver().findElement(By.xpath("//button[@class='VfPpkd-LgbsSe VfPpkd-LgbsSe-OWXEXe-k8QpJ VfPpkd-LgbsSe-OWXEXe-dgl2Hf nCP5yc AjY5Oe DuMIQc qIypjc TrZEUc lw1w4b']"));
+        WaitUtils.waitForElementToBeClickable(10, emailNextButton);
         emailNextButton.click();
-        WaitUtils.implicitlyWait(10);
 
         WebElement passwordField = getDriver().findElement(By.xpath("//div[@id='password']//input[@class='whsOnd zHQkBf']"));
         passwordField.sendKeys(password);
 
         WebElement passwordNextButton = getDriver().findElement(By.id("passwordNext"));
+        WaitUtils.waitForElementToBeClickable(10, passwordNextButton);
         passwordNextButton.click();
         WaitUtils.waitForPageReadyState(10);
-
     }
 
     public void switchToGmailFromGoogleAppsMenu() {
