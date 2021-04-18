@@ -19,9 +19,9 @@ public class GoogleSearchPage extends BasePage {
     }
 
     public void clickGoogleAppsButton() {
-        WaitUtils.waitForVisibilityOfElementLocated(15, GoogleApps);
+        WaitUtils.waitForVisibilityOfElementLocated(GoogleApps);
         clickOnElementLocated(GoogleApps);
-        WaitUtils.waitForElementToBeExpanded(15, GoogleApps);
+        WaitUtils.waitForElementToBeExpanded(GoogleApps);
     }
 
     public void clickLoginButton() {
@@ -34,17 +34,17 @@ public class GoogleSearchPage extends BasePage {
         emailField.sendKeys(email);
 
         WebElement emailNextButton = getDriver().findElement(By.xpath("//button[@class='VfPpkd-LgbsSe VfPpkd-LgbsSe-OWXEXe-k8QpJ VfPpkd-LgbsSe-OWXEXe-dgl2Hf nCP5yc AjY5Oe DuMIQc qIypjc TrZEUc lw1w4b']"));
-        WaitUtils.waitForElementToBeClickable(10, emailNextButton);
+        WaitUtils.waitForElementToBeClickable(emailNextButton);
         emailNextButton.click();
-        WaitUtils.waitForVisibilityOfElementLocated(15, By.xpath("//input[@name='password']"));
+        WaitUtils.waitForVisibilityOfElementLocated(By.xpath("//input[@name='password']"));
 
         WebElement passwordField = getDriver().findElement(By.xpath("//input[@name='password']"));
         passwordField.sendKeys(password);
 
         WebElement passwordNextButton = getDriver().findElement(By.id("passwordNext"));
-        WaitUtils.waitForElementToBeClickable(10, passwordNextButton);
+        WaitUtils.waitForElementToBeClickable(passwordNextButton);
         passwordNextButton.click();
-        WaitUtils.waitForPageReadyState(10);
+        WaitUtils.waitForPageReadyState();
     }
 
     public void switchToGmailFromGoogleAppsMenu() {

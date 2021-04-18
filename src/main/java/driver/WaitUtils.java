@@ -12,28 +12,30 @@ import static driver.DriverUtils.getDriver;
 
 public class WaitUtils {
 
-    public static void waitForPageReadyState(long timeout) {
-        new WebDriverWait(getDriver(), timeout).until(
+    private static final long TIMEOUT = 15;
+
+    public static void waitForPageReadyState() {
+        new WebDriverWait(getDriver(), TIMEOUT).until(
                 webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
     }
 
-    public static void waitForElementVisibility(long timeout, WebElement element) {
-        WebDriverWait wait = new WebDriverWait(getDriver(), timeout);
+    public static void waitForElementVisibility(WebElement element) {
+        WebDriverWait wait = new WebDriverWait(getDriver(), TIMEOUT);
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
-    public static void waitForVisibilityOfElementLocated(long timeout, By locator) {
-        WebDriverWait wait = new WebDriverWait(getDriver(), timeout);
+    public static void waitForVisibilityOfElementLocated(By locator) {
+        WebDriverWait wait = new WebDriverWait(getDriver(), TIMEOUT);
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
-    public static void waitForElementToBeClickable(long timeout, WebElement element) {
-        WebDriverWait wait = new WebDriverWait(getDriver(), timeout);
+    public static void waitForElementToBeClickable(WebElement element) {
+        WebDriverWait wait = new WebDriverWait(getDriver(), TIMEOUT);
         wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
-    public static void waitForElementToBeExpanded(long timeout, By locator) {
-        WebDriverWait wait = new WebDriverWait(getDriver(), timeout);
+    public static void waitForElementToBeExpanded(By locator) {
+        WebDriverWait wait = new WebDriverWait(getDriver(), TIMEOUT);
         wait.until(ExpectedConditions.attributeToBe(locator, "aria-expanded", "true"));
     }
 
