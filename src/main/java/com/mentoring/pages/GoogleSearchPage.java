@@ -9,6 +9,8 @@ import static driver.DriverUtils.getDriver;
 
 public class GoogleSearchPage extends BasePage {
 
+    private By GoogleApps = By.xpath("//a[@class='gb_D']");
+
     public void searchFor(String searchQuery) {
 
         WebElement searchField = getDriver().findElement(By.xpath("//input[@type='text']"));
@@ -17,8 +19,9 @@ public class GoogleSearchPage extends BasePage {
     }
 
     public void clickGoogleAppsButton() {
-        WebElement googleAppsButton = getDriver().findElement(By.xpath("//a[@aria-label='Приложения Google']"));
-        googleAppsButton.click();
+        WaitUtils.waitForVisibilityOfElementLocated(15, GoogleApps);
+        clickOnElementLocated(GoogleApps);
+        WaitUtils.waitForElementToBeExpanded(15, GoogleApps);
     }
 
     public void clickLoginButton() {
@@ -33,8 +36,9 @@ public class GoogleSearchPage extends BasePage {
         WebElement emailNextButton = getDriver().findElement(By.xpath("//button[@class='VfPpkd-LgbsSe VfPpkd-LgbsSe-OWXEXe-k8QpJ VfPpkd-LgbsSe-OWXEXe-dgl2Hf nCP5yc AjY5Oe DuMIQc qIypjc TrZEUc lw1w4b']"));
         WaitUtils.waitForElementToBeClickable(10, emailNextButton);
         emailNextButton.click();
+        WaitUtils.waitForVisibilityOfElementLocated(15, By.xpath("//input[@name='password']"));
 
-        WebElement passwordField = getDriver().findElement(By.xpath("//div[@id='password']//input[@class='whsOnd zHQkBf']"));
+        WebElement passwordField = getDriver().findElement(By.xpath("//input[@name='password']"));
         passwordField.sendKeys(password);
 
         WebElement passwordNextButton = getDriver().findElement(By.id("passwordNext"));

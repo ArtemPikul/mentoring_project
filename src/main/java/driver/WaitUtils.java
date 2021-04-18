@@ -1,5 +1,6 @@
 package driver;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -21,12 +22,19 @@ public class WaitUtils {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
-    public static void implicitlyWait(long timeout) {
-        getDriver().manage().timeouts().implicitlyWait(timeout, TimeUnit.SECONDS);
+    public static void waitForVisibilityOfElementLocated(long timeout, By locator) {
+        WebDriverWait wait = new WebDriverWait(getDriver(), timeout);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
     public static void waitForElementToBeClickable(long timeout, WebElement element) {
         WebDriverWait wait = new WebDriverWait(getDriver(), timeout);
         wait.until(ExpectedConditions.elementToBeClickable(element));
     }
+
+    public static void waitForElementToBeExpanded(long timeout, By locator) {
+        WebDriverWait wait = new WebDriverWait(getDriver(), timeout);
+        wait.until(ExpectedConditions.attributeToBe(locator, "aria-expanded", "true"));
+    }
+
 }
