@@ -48,9 +48,11 @@ public class GoogleSearchPage extends BasePage {
     }
 
     public void switchToGmailFromGoogleAppsMenu() {
-        clickGoogleAppsButton();
-        WebElement gmailAppIcon = getDriver().findElement(By.xpath("//a[@href='https://mail.google.com/mail/']"));
-        gmailAppIcon.click();
+        WaitUtils.waitForPageReadyState();
+        getDriver().switchTo().frame(0);
+        By gmailIcon = By.xpath("//a[@href='https://mail.google.com/mail/']");
+        clickOnElementLocated(gmailIcon);
+        getDriver().switchTo().defaultContent();
     }
 
 }
