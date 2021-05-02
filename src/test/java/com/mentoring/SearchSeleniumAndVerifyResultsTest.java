@@ -2,12 +2,10 @@ package com.mentoring;
 
 import com.mentoring.pages.GoogleResultsPage;
 import com.mentoring.pages.GoogleSearchPage;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static driver.DriverUtils.getDriver;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -19,15 +17,12 @@ public class SearchSeleniumAndVerifyResultsTest extends BaseTest {
     GoogleSearchPage googleSearchPage = new GoogleSearchPage();
     GoogleResultsPage googleResultsPage = new GoogleResultsPage();
 
-    @BeforeEach
-    public void googlePageSetUp() {
-        getDriver().get(GOOGLE_URL);
-    }
-
     @Test
     public void testVerifySearchReturnsResults() {
 
         int expectedResultsAmount = 8;
+
+        googleSearchPage.visit(GOOGLE_URL);
         googleSearchPage.searchFor(SEARCH_QUERY);
 
         String firstSearchResultTitle = googleResultsPage.getFirstSearchResultTitle();
@@ -42,6 +37,7 @@ public class SearchSeleniumAndVerifyResultsTest extends BaseTest {
     @Test
     public void testVerifyTheTitleOfTheFirstResultPage() {
 
+        googleSearchPage.visit(GOOGLE_URL);
         googleSearchPage.searchFor(SEARCH_QUERY);
         googleResultsPage.clickFirstResultLink();
 
@@ -54,6 +50,7 @@ public class SearchSeleniumAndVerifyResultsTest extends BaseTest {
     @Test
     public void testVerifyThatEachSearchResultContainsSearchQuery() {
 
+        googleSearchPage.visit(GOOGLE_URL);
         googleSearchPage.searchFor(SEARCH_QUERY);
         List<String> searchResultsList = googleResultsPage.getListOfSearchResultsLinksText();
 
@@ -66,12 +63,11 @@ public class SearchSeleniumAndVerifyResultsTest extends BaseTest {
 
         String wrongSearchQuery = "seeleniuum";
 
+        googleSearchPage.visit(GOOGLE_URL);
         googleSearchPage.searchFor(SEARCH_QUERY);
         List<String> searchResultsList = googleResultsPage.getListOfSearchResultsLinksText();
 
         assertTrue(searchResultsList.stream().noneMatch(x -> x.toLowerCase().contains(wrongSearchQuery)),
                 "There is a search result which contains wrong search query");
     }
-
-
 }

@@ -1,10 +1,7 @@
 package com.mentoring;
 
 import com.mentoring.pages.GoogleSearchPage;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static driver.DriverUtils.getDriver;
 
 public class GoogleMailTest extends BaseTest {
 
@@ -14,20 +11,13 @@ public class GoogleMailTest extends BaseTest {
 
     GoogleSearchPage googleSearchPage = new GoogleSearchPage();
 
-
-    @BeforeEach
-    public void googlePageSetUp() {
-        getDriver().get(GOOGLE_URL);
-    }
-
     @Test
     public void testVerifyLoginToGoogleMail() {
 
+        googleSearchPage.visit(GOOGLE_URL);
         googleSearchPage.clickLoginButton();
         googleSearchPage.loginIntoGoogleAccountWithCredentials(EMAIL_ADDRESS, EMAIL_PASSWORD);
         googleSearchPage.clickGoogleAppsButton();
         googleSearchPage.switchToGmailFromGoogleAppsMenu();
     }
-
-
 }

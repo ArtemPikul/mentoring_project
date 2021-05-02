@@ -14,4 +14,7 @@ public class BasePage {
         getDriver().findElement(locator).click();
     }
 
+    public void visit(String link) {
+        getDriver().get(link);
+    }
 }
