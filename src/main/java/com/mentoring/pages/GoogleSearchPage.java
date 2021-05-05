@@ -22,8 +22,9 @@ public class GoogleSearchPage extends BasePage {
     }
 
     public void clickLoginButton() {
-        WebElement loginButton = getDriver().findElement(By.xpath("//a[@class='gb_4 gb_5 gb_ae gb_4c']"));
-        loginButton.click();
+        By loginButton = By.xpath("//a[@class='gb_4 gb_5 gb_ae gb_4c']");
+        WaitUtils.waitForVisibilityOfElementLocated(loginButton);
+        clickOnElementLocated(loginButton);
     }
 
     public void fillEmailInputField(String email) {
