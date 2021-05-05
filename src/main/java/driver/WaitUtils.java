@@ -16,19 +16,9 @@ public class WaitUtils {
                 webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
     }
 
-    public static void waitForElementVisibility(WebElement element) {
-        WebDriverWait wait = new WebDriverWait(getDriver(), WAIT_TIMEOUT);
-        wait.until(ExpectedConditions.visibilityOf(element));
-    }
-
     public static void waitForVisibilityOfElementLocated(By locator) {
         WebDriverWait wait = new WebDriverWait(getDriver(), WAIT_TIMEOUT);
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-    }
-
-    public static void waitForElementToBeClickable(WebElement element) {
-        WebDriverWait wait = new WebDriverWait(getDriver(), WAIT_TIMEOUT);
-        wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
     public static void waitForElementToBeExpanded(By locator) {
