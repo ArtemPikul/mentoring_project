@@ -44,7 +44,6 @@ public class GoogleSearchPage extends BasePage {
     }
 
     public void switchToGmailFromGoogleAppsMenu() {
-        WaitUtils.waitForPageReadyState();
         getDriver().switchTo().frame(0);
         By gmailIcon = By.xpath("//a[@href='https://mail.google.com/mail/']");
         clickOnElementLocated(gmailIcon);
