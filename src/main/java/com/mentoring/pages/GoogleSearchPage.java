@@ -2,7 +2,6 @@ package com.mentoring.pages;
 
 import driver.WaitUtils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
 import static driver.DriverUtils.getDriver;
@@ -12,10 +11,8 @@ public class GoogleSearchPage extends BasePage {
     private By GoogleApps = By.xpath("//a[@class='gb_D']");
 
     public void searchFor(String searchQuery) {
-
-        WebElement searchField = getDriver().findElement(By.xpath("//input[@type='text']"));
-        searchField.sendKeys(searchQuery, Keys.ENTER);
-
+        By searchField = By.xpath("//input[@type='text']");
+        fillInputWithText(searchField, searchQuery);
     }
 
     public void clickGoogleAppsButton() {
@@ -25,26 +22,25 @@ public class GoogleSearchPage extends BasePage {
     }
 
     public void clickLoginButton() {
-        WebElement loginButton = getDriver().findElement(By.xpath("//a[@class='gb_4 gb_5 gb_ae gb_ce gb_4c']"));
+        WebElement loginButton = getDriver().findElement(By.xpath("//a[@class='gb_4 gb_5 gb_ae gb_4c']"));
         loginButton.click();
     }
 
-    public void loginIntoGoogleAccountWithCredentials(String email, String password) {
-        WebElement emailField = getDriver().findElement(By.id("identifierId"));
-        emailField.sendKeys(email);
+    public void fillEmailInputField(String email) {
+        By emailField = By.id("identifierId");
+        fillInputWithText(emailField, email);
 
-        WebElement emailNextButton = getDriver().findElement(By.xpath("//button[@class='VfPpkd-LgbsSe VfPpkd-LgbsSe-OWXEXe-k8QpJ VfPpkd-LgbsSe-OWXEXe-dgl2Hf nCP5yc AjY5Oe DuMIQc qIypjc TrZEUc lw1w4b']"));
-        WaitUtils.waitForElementToBeClickable(emailNextButton);
-        emailNextButton.click();
-        WaitUtils.waitForVisibilityOfElementLocated(By.xpath("//input[@name='password']"));
+        By emailNextButton = By.xpath("//button[@class='VfPpkd-LgbsSe VfPpkd-LgbsSe-OWXEXe-k8QpJ VfPpkd-LgbsSe-OWXEXe-dgl2Hf nCP5yc AjY5Oe DuMIQc qIypjc TrZEUc lw1w4b']");
+        clickOnElementLocated(emailNextButton);
+    }
 
-        WebElement passwordField = getDriver().findElement(By.xpath("//input[@name='password']"));
-        passwordField.sendKeys(password);
+    public void fillPasswordInputField(String password) {
+        By passwordField = By.xpath("//input[@name='password']");
+        WaitUtils.waitForVisibilityOfElementLocated(passwordField);
+        fillInputWithText(passwordField, password);
 
-        WebElement passwordNextButton = getDriver().findElement(By.id("passwordNext"));
-        WaitUtils.waitForElementToBeClickable(passwordNextButton);
-        passwordNextButton.click();
-        WaitUtils.waitForPageReadyState();
+        By passwordNextButton = By.id("passwordNext");
+        clickOnElementLocated(passwordNextButton);
     }
 
     public void switchToGmailFromGoogleAppsMenu() {
