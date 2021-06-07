@@ -1,10 +1,10 @@
 package com.mentoring.pages;
 
-import driver.WaitUtils;
+import com.mentoring.driver.WaitUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import static driver.DriverUtils.getDriver;
+import static com.mentoring.driver.DriverUtils.getDriver;
 
 public class BasePage {
 

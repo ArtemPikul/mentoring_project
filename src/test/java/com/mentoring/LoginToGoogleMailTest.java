@@ -3,8 +3,8 @@ package com.mentoring;
 import com.mentoring.pages.GoogleSearchPage;
 import org.junit.jupiter.api.Test;
 
-import static core.Configuration.EMAIL_ADDRESS;
-import static core.Configuration.EMAIL_PASSWORD;
+import static com.mentoring.core.Configuration.EMAIL_ADDRESS;
+import static com.mentoring.core.Configuration.EMAIL_PASSWORD;
 
 public class LoginToGoogleMailTest extends BaseTest {
 

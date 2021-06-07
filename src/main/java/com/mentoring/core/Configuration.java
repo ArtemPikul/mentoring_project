@@ -1,4 +1,4 @@
-package core;
+package com.mentoring.core;
 
 import java.time.Duration;
 
