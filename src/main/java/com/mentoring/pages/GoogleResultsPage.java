@@ -44,6 +44,6 @@ public class GoogleResultsPage extends BasePage {
             listOfSearchResultsLinksText.add(element.getText());
         }
 
-        return  listOfSearchResultsLinksText;
+        return listOfSearchResultsLinksText;
     }
 }

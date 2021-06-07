@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static com.mentoring.core.ConciseAPI.getPageTitle;
+import static com.mentoring.core.ConciseAPI.visit;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -22,7 +24,7 @@ public class SearchSeleniumAndVerifyResultsTest extends BaseTest {
 
         int expectedResultsAmount = 8;
 
-        googleSearchPage.visit(GOOGLE_URL);
+        visit(GOOGLE_URL);
         googleSearchPage.searchFor(SEARCH_QUERY);
 
         String firstSearchResultTitle = googleResultsPage.getFirstSearchResultTitle();
@@ -37,20 +39,20 @@ public class SearchSeleniumAndVerifyResultsTest extends BaseTest {
     @Test
     public void testVerifyTheTitleOfTheFirstResultPage() {
 
-        googleSearchPage.visit(GOOGLE_URL);
+        visit(GOOGLE_URL);
         googleSearchPage.searchFor(SEARCH_QUERY);
         googleResultsPage.clickFirstResultLink();
 
         String expectedTitle = "Что такое Selenium? / Хабр";
 
-        assertEquals(expectedTitle, googleResultsPage.getPageTitle(),
+        assertEquals(expectedTitle, getPageTitle(),
                 "The actual title doesn't match the expected");
     }
 
     @Test
     public void testVerifyThatEachSearchResultContainsSearchQuery() {
 
-        googleSearchPage.visit(GOOGLE_URL);
+        visit(GOOGLE_URL);
         googleSearchPage.searchFor(SEARCH_QUERY);
         List<String> searchResultsList = googleResultsPage.getListOfSearchResultsLinksText();
 
@@ -63,7 +65,7 @@ public class SearchSeleniumAndVerifyResultsTest extends BaseTest {
 
         String wrongSearchQuery = "seeleniuum";
 
-        googleSearchPage.visit(GOOGLE_URL);
+        visit(GOOGLE_URL);
         googleSearchPage.searchFor(SEARCH_QUERY);
         List<String> searchResultsList = googleResultsPage.getListOfSearchResultsLinksText();
 
