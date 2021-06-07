@@ -15,14 +15,12 @@ public class GoogleSearchPage extends BasePage {
     }
 
     public void clickGoogleAppsButton() {
-        WaitUtils.waitForVisibilityOfElementLocated(GoogleApps);
         clickOnElementLocated(GoogleApps);
         WaitUtils.waitForElementToBeExpanded(GoogleApps);
     }
 
     public void clickLoginButton() {
         By loginButton = By.xpath("//a[@class='gb_4 gb_5 gb_ae gb_4c']");
-        WaitUtils.waitForVisibilityOfElementLocated(loginButton);
         clickOnElementLocated(loginButton);
     }
 

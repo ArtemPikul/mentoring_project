@@ -5,10 +5,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import static com.mentoring.driver.DriverUtils.getDriver;
+import static com.mentoring.driver.WaitUtils.waitForElementToBeClickable;
 
 public class BasePage {
 
     public void clickOnElementLocated(By locator) {
+        waitForElementToBeClickable(locator);
         getDriver().findElement(locator).click();
     }
 
