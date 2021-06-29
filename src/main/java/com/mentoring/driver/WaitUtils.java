@@ -2,12 +2,9 @@ package com.mentoring.driver;
 
 import com.mentoring.core.Configuration;
 import org.openqa.selenium.By;
-import org.openqa.selenium.ElementNotInteractableException;
-import org.openqa.selenium.ElementNotVisibleException;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
-
-import java.util.NoSuchElementException;
 
 public class WaitUtils {
 
@@ -15,7 +12,7 @@ public class WaitUtils {
         FluentWait wait = new FluentWait<>(DriverUtils.getDriver())
                 .withTimeout(Configuration.WAIT_TIMEOUT)
                 .pollingEvery(Configuration.WAIT_POLLING_INTERVAL)
-                .ignoring(NoSuchElementException.class, ElementNotVisibleException.class);
+                .ignoring(WebDriverException.class);
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
@@ -24,7 +21,7 @@ public class WaitUtils {
         FluentWait wait = new FluentWait<>(DriverUtils.getDriver())
                 .withTimeout(Configuration.WAIT_TIMEOUT)
                 .pollingEvery(Configuration.WAIT_POLLING_INTERVAL)
-                .ignoring(NoSuchElementException.class);
+                .ignoring(WebDriverException.class);
 
         wait.until(ExpectedConditions.attributeToBe(locator, "aria-expanded", "true"));
     }
@@ -33,7 +30,7 @@ public class WaitUtils {
         FluentWait wait = new FluentWait<>(DriverUtils.getDriver())
                 .withTimeout(Configuration.WAIT_TIMEOUT)
                 .pollingEvery(Configuration.WAIT_POLLING_INTERVAL)
-                .ignoring(NoSuchElementException.class, ElementNotInteractableException.class);
+                .ignoring(WebDriverException.class);
 
         wait.until(ExpectedConditions.elementToBeClickable(locator));
     }
