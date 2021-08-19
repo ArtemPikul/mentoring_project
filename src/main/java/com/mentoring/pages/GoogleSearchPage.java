@@ -1,9 +1,10 @@
 package com.mentoring.pages;
 
-import com.mentoring.driver.WaitUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import static com.mentoring.driver.DriverUtils.getDriver;
+import static com.mentoring.driver.WaitUtils.waitFor;
 
 public class GoogleSearchPage extends BasePage {
 
@@ -16,7 +17,7 @@ public class GoogleSearchPage extends BasePage {
 
     public void clickGoogleAppsButton() {
         clickOnElementLocated(GoogleApps);
-        WaitUtils.waitForElementToBeExpanded(GoogleApps);
+        waitFor(ExpectedConditions.attributeToBe(GoogleApps, "aria-expanded", "true"));
     }
 
     public void clickLoginButton() {
@@ -34,7 +35,6 @@ public class GoogleSearchPage extends BasePage {
 
     public void fillPasswordInputField(String password) {
         By passwordField = By.xpath("//input[@name='password']");
-        WaitUtils.waitForVisibilityOfElementLocated(passwordField);
         fillInputWithText(passwordField, password);
 
         By passwordNextButton = By.id("passwordNext");

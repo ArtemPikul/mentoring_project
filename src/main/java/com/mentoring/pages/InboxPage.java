@@ -1,11 +1,12 @@
 package com.mentoring.pages;
 
-import com.mentoring.driver.WaitUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import static com.mentoring.driver.DriverUtils.getDriver;
+import static com.mentoring.driver.WaitUtils.waitFor;
 
 public class InboxPage extends BasePage {
 
@@ -39,18 +40,16 @@ public class InboxPage extends BasePage {
     }
 
     public String getSubjectOfFirstEmail() {
-        WaitUtils.waitForVisibilityOfElementLocated(FIRST_EMAIL_SUBJECT);
-
-        return getDriver().findElement(FIRST_EMAIL_SUBJECT).getText();
+        return waitFor(ExpectedConditions.visibilityOfElementLocated(FIRST_EMAIL_SUBJECT)).getText();
     }
 
     public void openFirstEmailFromInbox() {
-
         clickOnElementLocated(FIRST_EMAIL_SUBJECT);
     }
 
     public String getTextOfFirstEmail() {
         By letterText = By.xpath("//div[@role='listitem']//div[@dir='ltr']");
-        return getDriver().findElement(letterText).getText();
+
+        return waitFor(ExpectedConditions.visibilityOfElementLocated(letterText)).getText();
     }
 }
