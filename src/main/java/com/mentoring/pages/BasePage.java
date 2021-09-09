@@ -1,28 +1,17 @@
 package com.mentoring.pages;
 
-import driver.WaitUtils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import static driver.DriverUtils.getDriver;
+import static com.mentoring.driver.WaitUtils.waitFor;
 
 public class BasePage {
 
-    public String getPageTitle() {
-        return getDriver().getTitle();
-    }
-
     public void clickOnElementLocated(By locator) {
-        getDriver().findElement(locator).click();
-    }
-
-    public void visit(String link) {
-        getDriver().get(link);
+        waitFor(ExpectedConditions.elementToBeClickable(locator)).click();
     }
 
     public void fillInputWithText(By locator, String text) {
-        WaitUtils.waitForVisibilityOfElementLocated(locator);
-        WebElement element = getDriver().findElement(locator);
-        element.sendKeys(text);
+        waitFor(ExpectedConditions.visibilityOfElementLocated(locator)).sendKeys(text);
     }
 }

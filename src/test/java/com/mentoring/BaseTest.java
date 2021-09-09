@@ -6,8 +6,8 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import static driver.DriverUtils.getDriver;
-import static driver.DriverUtils.setDriver;
+import static com.mentoring.driver.DriverUtils.getDriver;
+import static com.mentoring.driver.DriverUtils.setDriver;
 
 
 public class BaseTest {

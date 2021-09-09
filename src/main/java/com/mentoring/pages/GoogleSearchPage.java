@@ -1,14 +1,14 @@
 package com.mentoring.pages;
 
-import driver.WaitUtils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import static driver.DriverUtils.getDriver;
+import static com.mentoring.driver.DriverUtils.getDriver;
+import static com.mentoring.driver.WaitUtils.waitFor;
 
 public class GoogleSearchPage extends BasePage {
 
-    private By GoogleApps = By.xpath("//a[@class='gb_D']");
+    private By GoogleApps = By.xpath("//a[@class='gb_C']");
 
     public void searchFor(String searchQuery) {
         By searchField = By.xpath("//input[@type='text']");
@@ -16,14 +16,12 @@ public class GoogleSearchPage extends BasePage {
     }
 
     public void clickGoogleAppsButton() {
-        WaitUtils.waitForVisibilityOfElementLocated(GoogleApps);
         clickOnElementLocated(GoogleApps);
-        WaitUtils.waitForElementToBeExpanded(GoogleApps);
+        waitFor(ExpectedConditions.attributeToBe(GoogleApps, "aria-expanded", "true"));
     }
 
     public void clickLoginButton() {
-        By loginButton = By.xpath("//a[@class='gb_4 gb_5 gb_ae gb_4c']");
-        WaitUtils.waitForVisibilityOfElementLocated(loginButton);
+        By loginButton = By.xpath("//a[@class='gb_3 gb_4 gb_9d gb_3c']");
         clickOnElementLocated(loginButton);
     }
 
@@ -37,7 +35,6 @@ public class GoogleSearchPage extends BasePage {
 
     public void fillPasswordInputField(String password) {
         By passwordField = By.xpath("//input[@name='password']");
-        WaitUtils.waitForVisibilityOfElementLocated(passwordField);
         fillInputWithText(passwordField, password);
 
         By passwordNextButton = By.id("passwordNext");

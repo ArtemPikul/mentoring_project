@@ -1,4 +1,4 @@
-package driver;
+package com.mentoring.driver;
 
 import org.openqa.selenium.WebDriver;
 

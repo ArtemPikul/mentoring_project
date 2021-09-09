@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 import java.util.ArrayList;
 import java.util.List;
 
-import static driver.DriverUtils.getDriver;
+import static com.mentoring.driver.DriverUtils.getDriver;
 
 public class GoogleResultsPage extends BasePage {
 
@@ -44,6 +44,6 @@ public class GoogleResultsPage extends BasePage {
             listOfSearchResultsLinksText.add(element.getText());
         }
 
-        return  listOfSearchResultsLinksText;
+        return listOfSearchResultsLinksText;
     }
 }
